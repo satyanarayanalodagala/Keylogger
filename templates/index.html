@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key Logger Control Panel</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header text-center">
+                <h1>Key Logger Control Panel</h1>
+            </div>
+            <div class="card-body">
+                {% if logging %}
+                    <div class="alert alert-success" role="alert">
+                        Keylogging is active.
+                    </div>
+                    <form action="/stop_logging" method="post" class="text-center">
+                        <button type="submit" class="btn btn-danger">Stop Keylogging</button>
+                    </form>
+                {% else %}
+                    <div class="alert alert-warning" role="alert">
+                        Keylogging is inactive. Press the button below to start logging keys.
+                    </div>
+                    <form action="/start_logging" method="post" class="text-center">
+                        <button type="submit" class="btn btn-primary">Start Keylogging</button>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-header text-center">
+                <h2>Logged Keys</h2>
+            </div>
+            <div class="card-body">
+                <pre>{{ log_content }}</pre>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
